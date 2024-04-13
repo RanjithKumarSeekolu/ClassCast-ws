@@ -3,14 +3,18 @@ const app = express();
 const http = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
-
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://class-cast-frontend.vercel.app", "http://localhost:3000"], // Add your allowed origins here
+    methods: ["GET", "POST"],
+  })
+);
 
 const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: ["https://class-cast-frontend.vercel.app", "http://localhost:3000"],
     methods: ["GET", "POST"],
   },
 });
